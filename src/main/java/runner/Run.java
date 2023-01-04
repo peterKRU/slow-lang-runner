@@ -1,5 +1,10 @@
 package runner;
 
-public class Run {
+public class Run extends Procedure{
+
+	@Override
+	public void execute() {
+		
+	}
 
 }
