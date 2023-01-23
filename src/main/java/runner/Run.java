@@ -53,8 +53,7 @@ public class Run extends Procedure {
 		Process process = processBuilder.start();
 	}
 
-	@SuppressWarnings("unused")
-	private static void setUpdateRequired(boolean value) {
+	public void setUpdateRequired(boolean value) {
 
 		updateRequired = value;
 	}

@@ -49,12 +49,12 @@ public class Compile extends Procedure {
 		command.add("-jar");
 		command.add("slow-lang-compiler.jar");
 		ProcessBuilder processBuilder = new ProcessBuilder(command);
+		
 		@SuppressWarnings("unused")
 		Process process = processBuilder.start();
 	}
 
-	@SuppressWarnings("unused")
-	private static void setUpdateRequired(boolean value) {
+	public void setUpdateRequired(boolean value) {
 
 		updateRequired = value;
 	}
