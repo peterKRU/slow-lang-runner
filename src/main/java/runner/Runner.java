@@ -1,20 +1,68 @@
 package runner;
 
+import java.io.IOException;
+import java.util.Scanner;
+
+import static runner.Commands.*;
+
 public class Runner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Runner running...");
+		Scanner scanner = new Scanner(System.in);
+		//ProcessRunner.compile("test");
 		
-		Compile compile = new Compile();
-		compile.setUpdateRequired(false);
-		compile.execute();
-		Run run = new Run();
-		run.setUpdateRequired(false);
-		run.execute();
+		boolean run = true;
 		
-		String consoleOutput = FileImporter.readFromFile("consoleOutput.txt");
-		System.out.println("EE console output: " + consoleOutput);
+		while (run) {
+
+			log(Messages.DEFAULT_STATIC_MESSAGE);
+
+			String input = scanner.nextLine();
+
+			if (input.equals(Commands.EXIT)) {
+
+				break;
+			}
+			
+			String[] splitInput = input.split(" ");
+			String command = splitInput[0];
+			String fileName = splitInput[1];
+
+			switch (command) {
+
+				case COMPILE -> {
+					
+					log(Messages.COMPILE);
+					ProcessRunner.compile(fileName);
+				}
+				case RUN -> {
+					
+					log(Messages.RUN);
+				}
+				case COMPILE_AND_RUN -> {
+					
+					log(Messages.COMPILE);
+					log(Messages.RUN);
+				}
+				case TEST -> {
+					
+					log(Messages.TEST);
+				}
+				default -> {
+					
+					log(Messages.NOT_RECOGNIZED);
+				}
+
+			}
+
+		}
+
+		scanner.close();
 	}
 
+	public static void log(String message) {
+
+		System.out.println(message);
+	}
 }
