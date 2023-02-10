@@ -1,0 +1,27 @@
+main {
+    
+    x = 1; 
+    y = 10;
+    
+    t = x + y;
+    m = subtract(x, y);
+    z = add(x, y);
+    print(z);
+}
+
+class TestClass {
+    
+    int add(int first, int second) {
+        
+        result = first + second;
+        
+        return result;
+    }
+
+    int subtract(int first, int second) {
+        
+        result = first - second;
+        
+        return result;
+    }
+}
