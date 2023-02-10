@@ -3,3 +3,8 @@ target/
 
 # Java class files
 *.class
+
+# Eclipse
+.settings/
+.classpath
+
