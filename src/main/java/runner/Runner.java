@@ -36,11 +36,13 @@ public class Runner {
 				case RUN -> {
 					
 					log(Messages.RUN);
+					ProcessRunner.run(fileName);
 				}
 				case COMPILE_AND_RUN -> {
 					
 					log(Messages.COMPILE);
 					log(Messages.RUN);
+					ProcessRunner.compileAndRun(fileName);
 				}
 				case TEST -> {
 					
