@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Build-Jdk-Spec: 17
-Class-Path: src/jackson-databind-2.14.1.jar src/jackson-annotations-2.14
- .1.jar src/jackson-core-2.14.1.jar
-Main-Class: runner.Runner
-Created-By: Maven Integration for Eclipse
-
