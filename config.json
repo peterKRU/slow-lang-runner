@@ -1,5 +1,5 @@
-{
-    "slow-lang-compiler:wip": "https://github.com/peterKRU/slow-lang-compiler/raw/master/target/compiler-0.0.1-SNAPSHOT-jar-with-dependencies.jar",
-    "slow-lang-execution-engine:wip": "https://github.com/peterKRU/slow-lang-execution-engine/raw/master/target/execution_engine-0.0.1-SNAPSHOT.jar"
+{  
+    "COMPILER_EXECUTABLE_NAME" : "slow-lang-compiler.jar",
+    "EXECUTION_ENGINE_EXECUTABLE_NAME" : "slow-lang-execution-engine.jar"
 }
 
