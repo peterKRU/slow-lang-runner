@@ -10,11 +10,8 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		
 		Scanner scanner = new Scanner(System.in);
-		//ProcessRunner.compile("test");
 		
-		boolean run = true;
-		
-		while (run) {
+		while (true) {
 
 			log(Messages.DEFAULT_STATIC_MESSAGE);
 
