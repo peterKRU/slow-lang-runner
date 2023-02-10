@@ -3,60 +3,58 @@ package runner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.io.OutputStreamWriter;
 
 public class ProcessRunner {
-	
+
 	public static void compile(String fileName) throws IOException {
-		
-		List<String> command = buildJavaJarCommand(ConstantsTable.COMPILER_EXECUTABLE_NAME);
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		processBuilder.redirectErrorStream(true);
-		Process process = processBuilder.start();
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		
-        String line;
-        
-        while ((line = reader.readLine()) != null) {
-            
-        	System.out.println(line);        
-        }
-        
-        reader.close();
+
+		runJarFile(ConstantsTable.COMPILER_EXECUTABLE_NAME, fileName);
 	}
-	
+
 	public static void run(String fileName) throws IOException {
 
-		List<String> command = buildJavaJarCommand(ConstantsTable.EXECUTION_ENGINE_EXECUTABLE_NAME);
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		processBuilder.redirectErrorStream(true);
-		Process process = processBuilder.start();
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		
-        String line;
-        
-        while ((line = reader.readLine()) != null) {
-            
-        	System.out.println(line);        
-        }
-        
-        reader.close();		
+		runJarFile(ConstantsTable.EXECUTION_ENGINE_EXECUTABLE_NAME, fileName);
 	}
-	
+
 	public static void compileAndRun(String fileName) throws IOException {
-		
+
 		compile(fileName);
-		run(fileName);
+		run(FileModifier.renameSourceToCompiled(fileName));
 	}
-	
-	public static void runDefaultTest(String fileName) {
-		
+
+	public static void runDefaultTest(String fileName) throws IOException {
+
+		run(Commands.TEST);
 	}
-	
-	private static List<String> buildJavaJarCommand(String jarName) {
-		
-		return List.of("java", "-jar", jarName);
+
+	public static void runJarFile(String jarFilePath, String input) {
+
+		try {
+
+			ProcessBuilder builder = new ProcessBuilder("java", "-jar", jarFilePath);
+			builder.redirectErrorStream(true);
+			Process process = builder.start();
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			OutputStreamWriter writer = new OutputStreamWriter(process.getOutputStream());
+
+			writer.write(input + System.lineSeparator());
+			writer.flush();
+
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+
+				System.out.println(line);
+			}
+
+			reader.close();
+			writer.close();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 	}
 }
